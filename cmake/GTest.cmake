@@ -1,0 +1,33 @@
+cmake_minimum_required( VERSION 3.5.1 )
+
+set( GTEST_VERSION 1.8.0 )
+set( GTEST_DIR ${PROJECT_SOURCE_DIR}/external-deps/googletest )
+
+if( ( NOT DEFINED ${GTEST_ROOT} ) OR ( NOT GTEST_ROOT ) )
+   set( GTEST_ROOT ${PROJECT_SOURCE_DIR}/external-deps/${CMAKE_CXX_COMPILER_ID} )
+endif()
+
+# Download and compile googletest at configure time
+configure_file( ${PROJECT_SOURCE_DIR}/cmake/GTest.cmake.in ${GTEST_DIR}/CMakeLists.txt )
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+   WORKING_DIRECTORY "${GTEST_DIR}" )
+execute_process(COMMAND "${CMAKE_COMMAND}" --build .
+   WORKING_DIRECTORY "${GTEST_DIR}" )
+
+# Prevent GoogleTest from overriding our compiler/linker options
+# when building with Visual Studio
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+find_package( GTest REQUIRED ${GTEST_VERSION} )
+
+function( add_gtest )
+   set( options )
+   set( oneValueArgs NAME )
+   set( multiValueArgs SOURCES ARGS )
+   cmake_parse_arguments( TEST "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+
+   add_executable( ${TEST_NAME} ${TEST_SOURCES} )
+   target_include_directories( ${TEST_NAME} SYSTEM PRIVATE ${GTEST_INCLUDE_DIRS} )
+   target_link_libraries( ${TEST_NAME} PRIVATE GTest::GTest GTest::Main )
+   GTEST_ADD_TESTS( ${TEST_NAME} "${TEST_AGRS}" ${TEST_SOURCES} )
+endfunction()
