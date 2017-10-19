@@ -1,5 +1,3 @@
-cmake_minimum_required( VERSION 3.5.1 )
-
 set( GTEST_VERSION 1.8.0 )
 set( GTEST_DIR ${PROJECT_SOURCE_DIR}/external-deps/googletest )
 
@@ -20,6 +18,9 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 find_package( GTest REQUIRED ${GTEST_VERSION} )
 
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+
 function( add_gtest )
    set( options )
    set( oneValueArgs NAME )
@@ -28,6 +29,6 @@ function( add_gtest )
 
    add_executable( ${TEST_NAME} ${TEST_SOURCES} )
    target_include_directories( ${TEST_NAME} SYSTEM PRIVATE ${GTEST_INCLUDE_DIRS} )
-   target_link_libraries( ${TEST_NAME} PRIVATE GTest::GTest GTest::Main )
+   target_link_libraries( ${TEST_NAME} PRIVATE ${GTEST_BOTH_LIBRARIES} PRIVATE Threads::Threads )
    GTEST_ADD_TESTS( ${TEST_NAME} "${TEST_AGRS}" ${TEST_SOURCES} )
 endfunction()
