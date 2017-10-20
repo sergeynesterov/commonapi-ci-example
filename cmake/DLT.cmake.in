@@ -1,0 +1,14 @@
+cmake_minimum_required( VERSION 2.8.2 )
+
+project( dlt-download NONE )
+
+add_compile_options( assdassdc )
+
+include( ExternalProject )
+ExternalProject_Add( dlt
+  GIT_REPOSITORY    https://github.com/GENIVI/dlt-daemon.git
+  GIT_TAG           v${DLT_VERSION}
+  SOURCE_DIR        "${DLT_DIR}/dlt-src"
+  BINARY_DIR        "${DLT_DIR}/dlt-build/${CMAKE_CXX_COMPILER_ID}"
+  CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${DLT_ROOT}" -DWITH_DLT_CONSOLE=OFF
+)
