@@ -4,6 +4,11 @@ compiler:
    - gcc
 
 sudo: false
+addons:
+   apt:
+      packages:
+         - zlib1g-dev
+         - libdbus-glib-1-dev
 
 env:
    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
