@@ -6,18 +6,15 @@ compiler:
 sudo: false
 addons:
    apt:
-      sources:
-         - boost-latest
-
       packages:
          # DLT
          - zlib1g-dev
          - libdbus-glib-1-dev
 
          # vsomeip
-         - libboost-system-dev
-         - libboost-thread-dev
-         - libboost-log-dev
+         - libboost-system1.55-dev
+         - libboost-thread1.55-dev
+         - libboost-log1.55-dev
 
          # dbus
          - libexpat1-dev
