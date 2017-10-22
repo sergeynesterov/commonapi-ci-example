@@ -6,6 +6,9 @@ compiler:
 sudo: false
 addons:
    apt:
+      source:
+         - boost-latest
+
       packages:
          # DLT
          - zlib1g-dev
