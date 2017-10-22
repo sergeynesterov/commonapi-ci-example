@@ -15,9 +15,9 @@ addons:
          - libdbus-glib-1-dev
 
          # vsomeip
-         - libboost-system1.58-dev
-         - libboost-thread1.58-dev
-         - libboost-log1.58-dev
+         - libboost-system1.*-dev
+         - libboost-thread1.*-dev
+         - libboost-log1.*-dev
 
          # dbus
          - libexpat1-dev
