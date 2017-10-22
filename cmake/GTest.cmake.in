@@ -8,6 +8,6 @@ ExternalProject_Add( googletest
    GIT_TAG           "release-${GTEST_VERSION}"
    PREFIX            "${GTEST_DIR}"
    BINARY_DIR        "${GTEST_DIR}/src/googletest-build/${CMAKE_CXX_COMPILER_ID}"
-   BUILD_COMMAND     ${CMAKE_MAKE_PROGRAM} -j $(nproc)
+   BUILD_COMMAND     "${CMAKE_MAKE_PROGRAM}" -j $(nproc)
    CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${GTEST_ROOT}"
 )

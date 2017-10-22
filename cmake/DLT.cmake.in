@@ -8,7 +8,7 @@ ExternalProject_Add( dlt-daemon
    GIT_TAG           "v${DLT_VERSION}"
    PREFIX            "${DLT_DIR}"
    BINARY_DIR        "${DLT_DIR}/src/dlt-daemon-build/${CMAKE_CXX_COMPILER_ID}"
-   BUILD_COMMAND     ${CMAKE_MAKE_PROGRAM} -j $(nproc)
+   BUILD_COMMAND     "${CMAKE_MAKE_PROGRAM}" -j $(nproc)
    CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${DLT_ROOT}"
                      "-DCMAKE_PROJECT_automotive-dlt_INCLUDE=${DLT_DIR}/FIX_CLANG_ERRORS.cmake"
 )
