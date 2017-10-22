@@ -5,12 +5,9 @@ if( ( NOT DEFINED ${GTEST_ROOT} ) OR ( NOT GTEST_ROOT ) )
    set( GTEST_ROOT ${PROJECT_SOURCE_DIR}/external-deps/${CMAKE_CXX_COMPILER_ID} )
 endif()
 
-# Download and compile googletest at configure time
 configure_file( ${PROJECT_SOURCE_DIR}/cmake/GTest.cmake.in ${GTEST_DIR}/CMakeLists.txt )
-execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-   WORKING_DIRECTORY "${GTEST_DIR}" )
-execute_process(COMMAND "${CMAKE_COMMAND}" --build .
-   WORKING_DIRECTORY "${GTEST_DIR}" )
+execute_process( COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${GTEST_DIR}" )
+execute_process( COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${GTEST_DIR}" )
 
 # Prevent GoogleTest from overriding our compiler/linker options
 # when building with Visual Studio
@@ -18,8 +15,8 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 find_package( GTest REQUIRED ${GTEST_VERSION} )
 
-set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
+set( THREADS_PREFER_PTHREAD_FLAG ON )
+find_package( Threads REQUIRED )
 
 function( add_gtest )
    set( options )

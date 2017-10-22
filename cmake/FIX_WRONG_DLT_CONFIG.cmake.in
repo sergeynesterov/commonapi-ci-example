@@ -1,0 +1,2 @@
+include_directories( ${CAPI_ROOT}/include )
+add_compile_options( $<$<CXX_COMPILER_ID:Clang>:-Wno-ignored-attributes> )

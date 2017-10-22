@@ -1,5 +1,6 @@
 include( ${PROJECT_SOURCE_DIR}/cmake/GTest.cmake )
 include( ${PROJECT_SOURCE_DIR}/cmake/DLT.cmake )
+include( ${PROJECT_SOURCE_DIR}/cmake/CAPI.cmake )
 
 add_gtest( NAME dummyTest SOURCES test.cpp )
 

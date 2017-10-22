@@ -7,8 +7,17 @@ sudo: false
 addons:
    apt:
       packages:
+         # DLT
          - zlib1g-dev
          - libdbus-glib-1-dev
+
+         # vsomeip
+         - libboost-system-dev
+         - libboost-thread-dev
+         - libboost-log-dev
+
+         # dbus
+         - libexpat1-dev
 
 env:
    - TARGET_CPU=amd64 BUILD_CONFIGURATION=Debug
@@ -20,5 +29,5 @@ script:
    - mkdir build
    - cd build
    - cmake .. -DCMAKE_BUILD_TYPE=$BUILD_CONFIGURATION -DTARGET_CPU=$TARGET_CPU
-   - cmake --build .
+   - cmake --build . -- -j$(nproc)
    - ctest --output-on-failure

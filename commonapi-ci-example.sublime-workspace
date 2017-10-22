@@ -1,0 +1,811 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"CMAKEMA",
+				"CMAKE_MAKE_PROGRAM"
+			],
+			[
+				"CMAKE_INCLUDE",
+				"CMAKE_<LANG>_IMPLICIT_INCLUDE_DIRECTORIES"
+			],
+			[
+				"COM",
+				"COMPILE_OPTIONS"
+			],
+			[
+				"com",
+				"COMPILE_FLAGS"
+			],
+			[
+				"add",
+				"add_compile_options"
+			],
+			[
+				"CMAKELIN",
+				"CMAKE_LINK_LIBRARY_FLAG"
+			],
+			[
+				"target",
+				"target_compile_options"
+			],
+			[
+				"PRO",
+				"PROJECT_SOURCE_DIR"
+			],
+			[
+				"PROJE",
+				"PROJECT_SOURCE_DIR"
+			],
+			[
+				"CMAKE_CURR",
+				"CMAKE_CURRENT_SOURCE_DIR"
+			],
+			[
+				"PROC",
+				"ProcessorCount"
+			],
+			[
+				"GTE",
+				"FindGTest"
+			],
+			[
+				"EXTE",
+				"ExternalProject"
+			],
+			[
+				"CMAKECOMPI",
+				"CMAKE_<LANG>_COMPILER_ID"
+			],
+			[
+				"CMAKE_COMPiler",
+				"CMAKE_<LANG>_COMPILER"
+			],
+			[
+				"CMAKE_COMP",
+				"CMAKE_<LANG>_COMPILER_ID"
+			],
+			[
+				"find",
+				"find_package"
+			],
+			[
+				"target_",
+				"target_include_directories"
+			],
+			[
+				"ena",
+				"enable_testing"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"cmake",
+				"cmake_minimum_required"
+			],
+			[
+				"COMPILER",
+				"CMAKE_<LANG>_COMPILER_ID"
+			],
+			[
+				"CMAKE_OUT",
+				"CMAKE_RUNTIME_OUTPUT_DIRECTORY"
+			],
+			[
+				"CMAKE_LIB",
+				"CMAKE_LIBRARY_OUTPUT_DIRECTORY"
+			],
+			[
+				"end",
+				"endif"
+			],
+			[
+				"CMANE_B",
+				"CMAKE_CURRENT_BINARY_DIR"
+			],
+			[
+				"CMAKE_B",
+				"CMAKE_BINARY_DIR"
+			],
+			[
+				"include",
+				"include_directories"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "set( CAPI_VERSION 3.1.12 )\n\nset( VSOMEIP_VERSION 2.7.0 )\nset( DBUS_VERSION 1.10.24 )\n#1.10.10\n\nset( CAPI_DIR ${PROJECT_SOURCE_DIR}/external-deps/capi )\nset( CAPI_ROOT ${PROJECT_SOURCE_DIR}/external-deps/${CMAKE_CXX_COMPILER_ID} )\n\nset( ENV{PKG_CONFIG_PATH} \"$ENV{PKG_CONFIG_PATH}:${CAPI_ROOT}/lib/pkgconfig\" )\n\nconfigure_file( ${PROJECT_SOURCE_DIR}/cmake/FIX_WRONG_DLT_CONFIG.cmake.in ${CAPI_DIR}/FIX_WRONG_DLT_CONFIG.cmake )\nconfigure_file( ${PROJECT_SOURCE_DIR}/cmake/CAPI.cmake.in ${CAPI_DIR}/CMakeLists.txt )\nexecute_process( COMMAND \"${CMAKE_COMMAND}\" -G \"${CMAKE_GENERATOR}\" . WORKING_DIRECTORY \"${CAPI_DIR}\" )\nexecute_process( COMMAND \"${CMAKE_COMMAND}\" --build . -- j $(nproc) WORKING_DIRECTORY \"${CAPI_DIR}\" )\n\n#find_package( CommonAPI REQUIRED ${CAPI_VERSION} HINTS ${CAPI_ROOT} )\nfind_package( CommonAPI REQUIRED 8 )\nfind_package( CommonAPI-DBus REQUIRED ${CAPI_VERSION} )\nfind_package( CommonAPI-SomeIP REQUIRED ${CAPI_VERSION} )\n",
+			"file": "cmake/CAPI.cmake",
+			"file_size": 928,
+			"file_write_time": 131531711244462993,
+			"settings":
+			{
+				"buffer_size": 942,
+				"encoding": "UTF-8",
+				"line_ending": "Unix",
+				"name": "CAPI-core.cmake"
+			}
+		},
+		{
+			"file": "cmake/FIX_WRONG_DLT_CONFIG.cmake.in",
+			"settings":
+			{
+				"buffer_size": 119,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".travis.yml",
+			"settings":
+			{
+				"buffer_size": 686,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmake/CAPI.cmake.in",
+			"settings":
+			{
+				"buffer_size": 4106,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "Searching 896 files for \"do patch\"\n\n0 matches\n\nSearching 505 files for \"do patch\"\n\n0 matches\n\nSearching 2886 files for \"do patch\"\n\n/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/CMakeFiles/dbus.dir/build.make:\n  100  src/dbus-stamp/dbus-patch: src/dbus-stamp/dbus-download\n  101  \t@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) \"Performing patch step for 'dbus'\"\n  102: \tcd /home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus && sh -c \"for i in /home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/capicxx-dbus-runtime-clone/src/dbus-patches/*.patch ; do patch -p1 -i \\$$i ; done\"\n  103  \tcd /home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus && /usr/bin/cmake -E touch /home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus-stamp/dbus-patch\n  104  \n\n/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/CMakeLists.txt:\n   72     PREFIX            \"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi\"\n   73     LIST_SEPARATOR    +\n   74:    PATCH_COMMAND     sh -c \"for i in /home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/capicxx-dbus-runtime-clone/src/dbus-patches/*.patch + do patch -p1 -i $i + done\"\n   75     CONFIGURE_COMMAND \"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus/configure\" \"--prefix=/home/snesterov/dev/git/commonapi-ci-example/external-deps/GNU\"\n   76     BINARY_DIR        \"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus-build/GNU\"\n\n2 matches across 2 files\n",
+			"settings":
+			{
+				"buffer_size": 1715,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "external-deps/capi/CMakeFiles/dbus.dir/build.make",
+			"settings":
+			{
+				"buffer_size": 8483,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tests/CMakeLists.txt",
+			"settings":
+			{
+				"buffer_size": 460,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmake/DLT.cmake.in",
+			"settings":
+			{
+				"buffer_size": 565,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmake/GTest.cmake.in",
+			"settings":
+			{
+				"buffer_size": 484,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmake/FIX_CLANG_ERRORS.cmake.in",
+			"settings":
+			{
+				"buffer_size": 68,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "cmake/DLT.cmake",
+			"settings":
+			{
+				"buffer_size": 720,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 124.0,
+		"last_filter": "cmak",
+		"selected_items":
+		[
+			[
+				"cmak",
+				"Set Syntax: CMakeEditor"
+			],
+			[
+				"git stat",
+				"git: status"
+			],
+			[
+				"cmake",
+				"Set Syntax: CMakeEditor"
+			],
+			[
+				"git sta",
+				"git: status"
+			],
+			[
+				"pakca in",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 497.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/snesterov/dev/git/commonapi-ci-example",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake",
+		"/home/snesterov/dev/git/commonapi-ci-example/tests"
+	],
+	"file_history":
+	[
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/CMakeFiles/dbus.dir/build.make",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus/cmake/CMakeLists.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/FIX_CLANG_ERRORS.cmake.in",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/DLT.cmake",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/DLT.cmake.in",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/GTest.cmake.in",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/GTest.cmake",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/vsomeip/CMakeLists.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/cmake/FIX_WRONG_DLT_CONFIG.cmake.in",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus/autogen.sh",
+		"/home/snesterov/dev/git/commonapi-ci-example/tests/test.cpp",
+		"/home/snesterov/dev/git/commonapi-ci-example/tests/CMakeLists.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/CMakeFiles/Makefile2",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi-core/capicxx-core-runtime-src/include/CommonAPI/LoggerImpl.hpp",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi-core/capicxx-core-runtime-src/CMakeLists.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/dlt/dlt-build/Clang/src/console/logstorage/CMakeFiles/dlt-logstorage-ctrl.dir/flags.make",
+		"/home/snesterov/dev/git/commonapi-ci-example/CMakeLists.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/dlt/dlt-src/INSTALL",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/dlt/dlt-src/README.md",
+		"/home/snesterov/dev/git/commonapi-ci-example/.travis.yml",
+		"/home/snesterov/dev/git/commonapi-ci-example-product/tests/CMakeFiles/dummyTest.dir/flags.make",
+		"/home/snesterov/dev/git/commonapi-ci-example-product/tests/CMakeFiles/dummyTest.dir/link.txt",
+		"/home/snesterov/dev/git/commonapi-ci-example/external-deps/googletest/googletest-src/.travis.yml",
+		"/home/snesterov/dev/git/commonapi-ci-example-deps/gtest.sh",
+		"/home/snesterov/dev/git/commonapi-ci-example/.gitignore",
+		"/home/snesterov/dev/git/commonapi-ci-example/deps/googletest/googletest/include/gtest/gtest.h",
+		"/home/snesterov/dev/git/commonapi-ci-example/main.cpp",
+		"/home/snesterov/dev/git/commonapi-ci-example/commonapi-ci-example.sublime-project"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 98.0,
+		"where_history":
+		[
+			"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi",
+			"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus",
+			"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi/src/dbus-build",
+			"/home/snesterov/dev/git/commonapi-ci-example/external-deps/capi"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"make -j ",
+			"make",
+			"do patch",
+			"patch",
+			"-fo",
+			"CAPI_CORE_DIR",
+			"-\n",
+			"DLT",
+			"console",
+			"WITH_DLT_CONSOLE",
+			"<XPREFIX>",
+			"GTEST",
+			"CMAKE_SOURCE_DIR",
+			"=/\n",
+			"CMAKE_BINARY",
+			"GTest_VERSION",
+			"test_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "cmake/CAPI.cmake",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 942,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								684,
+								678
+							]
+						],
+						"settings":
+						{
+							"auto_name": "CAPI-core.cmake",
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/CMakeEditor/CMakeEditor.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "cmake/FIX_WRONG_DLT_CONFIG.cmake.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 119,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								119,
+								119
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": ".travis.yml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 686,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								316,
+								316
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "cmake/CAPI.cmake.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4106,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1519,
+								1519
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/CMakeEditor/CMakeEditor.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 358.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1715,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										753,
+										761
+									],
+									[
+										1362,
+										1370
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								759,
+								759
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 3,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 105.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "external-deps/capi/CMakeFiles/dbus.dir/build.make",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8483,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5261,
+								5261
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 900.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "tests/CMakeLists.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								460,
+								460
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/CMakeEditor/CMakeEditor.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "cmake/DLT.cmake.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 565,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "cmake/GTest.cmake.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 484,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								105,
+								124
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "cmake/FIX_CLANG_ERRORS.cmake.in",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 68,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								68,
+								68
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "cmake/DLT.cmake",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 720,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								263,
+								241
+							]
+						],
+						"settings":
+						{
+							"git_savvy.repo_path": "/home/snesterov/dev/git/commonapi-ci-example",
+							"syntax": "Packages/CMakeEditor/CMakeEditor.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CMakeEditor":
+	{
+		"height": 249.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "commonapi-ci-example.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gtest/gtest",
+				"deps/googletest/googletest/include/gtest/gtest.h"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 458.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
