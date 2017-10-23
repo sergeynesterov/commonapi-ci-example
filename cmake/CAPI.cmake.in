@@ -69,7 +69,6 @@ ExternalProject_Add( capicxx-dbus-runtime-clone
 ExternalProject_Add( dbus
    DEPENDS           capicxx-dbus-runtime-clone
    URL               "http://dbus.freedesktop.org/releases/dbus/dbus-${DBUS_VERSION}.tar.gz"
-   UPDATE_COMMAND    ""
    PREFIX            "${CAPI_DIR}"
    LIST_SEPARATOR    +
    PATCH_COMMAND     sh -c "for i in ${CAPI_DIR}/src/capicxx-dbus-runtime-clone/src/dbus-patches/*.patch + do patch -p1 -i $i + done"

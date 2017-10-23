@@ -13,7 +13,7 @@ execute_process( COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${GTEST
 # when building with Visual Studio
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
-find_package( GTest REQUIRED ${GTEST_VERSION} )
+find_package( GTest ${GTEST_VERSION} REQUIRED )
 
 set( THREADS_PREFER_PTHREAD_FLAG ON )
 find_package( Threads REQUIRED )

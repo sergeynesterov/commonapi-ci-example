@@ -16,8 +16,8 @@ configure_file( ${PROJECT_SOURCE_DIR}/cmake/FIX_WRONG_DLT_CONFIG.cmake.in ${CAPI
 configure_file( ${PROJECT_SOURCE_DIR}/cmake/CAPI.cmake.in ${CAPI_DIR}/CMakeLists.txt )
 execute_process( COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${CAPI_DIR}" )
 #execute_process( COMMAND "${CMAKE_COMMAND}" --build . -- -j${NPROC} WORKING_DIRECTORY "${CAPI_DIR}" )
-execute_process( COMMAND "${CMAKE_COMMAND}" --build . -- -j4 WORKING_DIRECTORY "${CAPI_DIR}" )
+execute_process( COMMAND "${CMAKE_COMMAND}" --build . -- -j8 WORKING_DIRECTORY "${CAPI_DIR}" )
 
-find_package( CommonAPI REQUIRED ${CAPI_VERSION} )
-find_package( CommonAPI-DBus REQUIRED ${CAPI_VERSION} )
-find_package( CommonAPI-SomeIP REQUIRED ${CAPI_VERSION} )
+find_package( CommonAPI ${CAPI_VERSION} EXACT REQUIRED )
+find_package( CommonAPI-DBus ${CAPI_VERSION} EXACT REQUIRED )
+find_package( CommonAPI-SomeIP ${CAPI_VERSION} EXACT REQUIRED )

@@ -21,7 +21,7 @@ addons:
 
 cache:
   directories:
-  - ../external-deps
+  - external-deps
 
 env:
    - BUILD_CONFIGURATION=Debug
