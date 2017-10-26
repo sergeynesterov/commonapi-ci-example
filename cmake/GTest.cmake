@@ -6,7 +6,7 @@ if( ( NOT DEFINED ${GTEST_ROOT} ) OR ( NOT GTEST_ROOT ) )
 endif()
 
 configure_file( ${PROJECT_SOURCE_DIR}/cmake/GTest.cmake.in ${GTEST_DIR}/CMakeLists.txt )
-execute_process( COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${GTEST_DIR}" )
+execute_process( COMMAND "${CMAKE_COMMAND}" -DGTEST_ROOT=${GTEST_ROOT} -G "${CMAKE_GENERATOR}" . WORKING_DIRECTORY "${GTEST_DIR}" )
 execute_process( COMMAND "${CMAKE_COMMAND}" --build . WORKING_DIRECTORY "${GTEST_DIR}" )
 
 # Prevent GoogleTest from overriding our compiler/linker options
