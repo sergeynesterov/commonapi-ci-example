@@ -1,4 +1,4 @@
 include_directories( ${CAPI_ROOT}/include )
 
-add_compile_options( $<$<CXX_COMPILER_ID:Clang>:-Wno-ignored-attributes> $<$<CXX_COMPILER_ID:Clang>:-std=c++11> )
-#add_definitions( -DBOOST_ASIO_HAS_STD_CHRONO -DBOOST_ASIO_HAS_STD_ARRAY )
+add_compile_options( $<$<CXX_COMPILER_ID:Clang>:-Wno-ignored-attributes> )
+add_definitions( -DBOOST_ASIO_HAS_STD_CHRONO -DBOOST_ASIO_HAS_STD_ARRAY )
