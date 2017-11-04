@@ -1,17 +1,17 @@
 cmake_minimum_required( VERSION 2.8.2 )
 
-project( googletest-download C CXX )
+project( googletest-download CXX )
 
 find_package( GTest ${GTEST_VERSION} )
 
 if( NOT GTEST_FOUND )
    include( ExternalProject )
    ExternalProject_Add( googletest
-      GIT_REPOSITORY    "https://github.com/google/googletest.git"
-      GIT_TAG           "release-${GTEST_VERSION}"
-      PREFIX            "${GTEST_DIR}"
-      BINARY_DIR        "${GTEST_DIR}/src/googletest-build/${CMAKE_CXX_COMPILER_ID}"
-      BUILD_COMMAND     "${CMAKE_MAKE_PROGRAM}" -j $(nproc)
+      URL               "https://github.com/google/googletest/archive/release-${GTEST_VERSION}.tar.gz"
+      PREFIX            "${GTEST_VERSION}"
+      BINARY_DIR        "${GTEST_VERSION}/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
+      BUILD_COMMAND     "${CMAKE_BUILD_TOOL}" -j $(nproc)
       CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${GTEST_ROOT}"
+                        "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
    )
 endif()

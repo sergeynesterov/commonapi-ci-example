@@ -8,7 +8,7 @@ ExternalProject_Add( capicxx-core-tools
    CONFIGURE_COMMAND ""
    BUILD_COMMAND     ""
    PREFIX            "${CAPI_DIR}"
-   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi-generator.zip" -d "${CAPI_ROOT}/bin"
+   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi-generator.zip" -d "${CAPI_ROOT}/bin/commonapi-generator"
 )
 
 ExternalProject_Add( capicxx-dbus-tools
@@ -16,7 +16,7 @@ ExternalProject_Add( capicxx-dbus-tools
    CONFIGURE_COMMAND ""
    BUILD_COMMAND     ""
    PREFIX            "${CAPI_DIR}"
-   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi_dbus_generator.zip" -d "${CAPI_ROOT}/bin"
+   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi_dbus_generator.zip" -d "${CAPI_ROOT}/bin/commonapi_dbus_generator"
 )
 
 ExternalProject_Add( capicxx-someip-tools
@@ -24,17 +24,18 @@ ExternalProject_Add( capicxx-someip-tools
    CONFIGURE_COMMAND ""
    BUILD_COMMAND     ""
    PREFIX            "${CAPI_DIR}"
-   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi_someip_generator.zip" -d "${CAPI_ROOT}/bin"
+   INSTALL_COMMAND   unzip -uo "${CAPI_DIR}/src/commonapi_someip_generator.zip" -d "${CAPI_ROOT}/bin/commonapi_someip_generator"
 )
 
 find_package( CommonAPI ${CAPI_VERSION} EXACT )
 if( NOT CommonAPI_FOUND )
    ExternalProject_Add( capicxx-core-runtime
-      GIT_REPOSITORY    "https://github.com/GENIVI/capicxx-core-runtime.git"
-      GIT_TAG           "${CAPI_VERSION}"
+      URL               "https://github.com/GENIVI/capicxx-core-runtime/archive/${CAPI_VERSION}.tar.gz"
+      DOWNLOAD_DIR      "${CAPI_DIR}/src/capicxx-core-runtime-download"
       PREFIX            "${CAPI_DIR}"
-      BINARY_DIR        "${CAPI_DIR}/src/capicxx-core-runtime-build/${CMAKE_CXX_COMPILER_ID}"
+      BINARY_DIR        "${CAPI_DIR}/src/capicxx-core-runtime-build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
       CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${CAPI_ROOT}"
+                        "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                         "-DCMAKE_PROJECT_libcommonapi_INCLUDE=${CAPI_DIR}/FIX_WRONG_DLT_CONFIG.cmake"
    )
 endif()
@@ -42,11 +43,11 @@ endif()
 find_package( CommonAPI-SomeIP ${CAPI_VERSION} EXACT )
 if( NOT CommonAPI-SomeIP_FOUND )
    ExternalProject_Add( vsomeip
-      GIT_REPOSITORY    "https://github.com/GENIVI/vsomeip.git"
-      GIT_TAG           "${VSOMEIP_VERSION}"
-      PREFIX            "${CAPI_DIR}"
-      BINARY_DIR        "${CAPI_DIR}/src/vsomeip-build/${CMAKE_CXX_COMPILER_ID}"
+      URL               "https://github.com/GENIVI/vsomeip/archive/${VSOMEIP_VERSION}.tar.gz"
+      PREFIX            "vsomeip-${VSOMEIP_VERSION}"
+      BINARY_DIR        "vsomeip-${VSOMEIP_VERSION}/build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
       CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${CAPI_ROOT}"
+                        "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                         "-DCMAKE_PROJECT_vsomeip_INCLUDE=${CAPI_DIR}/FIX_WRONG_DLT_CONFIG.cmake"
                         -DENABLE_SIGNAL_HANDLING=1
                         -DDIAGNOSIS_ADDRESS=0x10
@@ -54,20 +55,21 @@ if( NOT CommonAPI-SomeIP_FOUND )
 
    ExternalProject_Add( capicxx-someip-runtime
       DEPENDS           vsomeip
-      GIT_REPOSITORY    "https://github.com/GENIVI/capicxx-someip-runtime.git"
-      GIT_TAG           "${CAPI_VERSION}"
+      URL               "https://github.com/GENIVI/capicxx-someip-runtime/archive/${CAPI_VERSION}.tar.gz"
+      DOWNLOAD_DIR      "${CAPI_DIR}/src/capicxx-someip-runtime-download"
       PREFIX            "${CAPI_DIR}"
-      BINARY_DIR        "${CAPI_DIR}/src/capicxx-someip-runtime-build/${CMAKE_CXX_COMPILER_ID}"
+      BINARY_DIR        "${CAPI_DIR}/src/capicxx-someip-runtime-build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
       CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${CAPI_ROOT}"
+                        "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                         -DUSE_INSTALLED_COMMONAPI=OFF
    )
 endif()
 
 find_package( CommonAPI-DBus ${CAPI_VERSION} EXACT )
 if( NOT CommonAPI-DBus_FOUND )
-   ExternalProject_Add( capicxx-dbus-runtime-clone
-      GIT_REPOSITORY    "https://github.com/GENIVI/capicxx-dbus-runtime.git"
-      GIT_TAG           "${CAPI_VERSION}"
+   ExternalProject_Add( capicxx-dbus-runtime
+      URL               "https://github.com/GENIVI/capicxx-dbus-runtime/archive/${CAPI_VERSION}.tar.gz"
+      DOWNLOAD_DIR      "${CAPI_DIR}/src/capicxx-dbus-runtime-download"
       PREFIX            "${CAPI_DIR}"
       CONFIGURE_COMMAND ""
       BUILD_COMMAND     ""
@@ -75,22 +77,23 @@ if( NOT CommonAPI-DBus_FOUND )
    )
 
    ExternalProject_Add( dbus
-      DEPENDS           capicxx-dbus-runtime-clone
+      DEPENDS           capicxx-dbus-runtime
       URL               "http://dbus.freedesktop.org/releases/dbus/dbus-${DBUS_VERSION}.tar.gz"
       PREFIX            "${CAPI_DIR}"
       LIST_SEPARATOR    +
-      PATCH_COMMAND     sh -c "for i in ${CAPI_DIR}/src/capicxx-dbus-runtime-clone/src/dbus-patches/*.patch + do patch -p1 -i $i + done"
+      PATCH_COMMAND     sh -c "for i in ${CAPI_DIR}/src/capicxx-dbus-runtime/src/dbus-patches/*.patch + do patch -p1 -i $i + done"
       CONFIGURE_COMMAND "${CAPI_DIR}/src/dbus/configure" "--prefix=${CAPI_ROOT}"
-      BINARY_DIR        "${CAPI_DIR}/src/dbus-build/${CMAKE_CXX_COMPILER_ID}"
+      BINARY_DIR        "${CAPI_DIR}/src/dbus-build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
    )
 
-   ExternalProject_Add( capicxx-dbus-runtime
-      DEPENDS           dbus capicxx-dbus-runtime-clone
+   ExternalProject_Add( capicxx-dbus-runtime-build
+      DEPENDS           dbus capicxx-dbus-runtime
       DOWNLOAD_COMMAND  ""
       PREFIX            "${CAPI_DIR}"
-      SOURCE_DIR        "${CAPI_DIR}/src/capicxx-dbus-runtime-clone"
-      BINARY_DIR        "${CAPI_DIR}/src/capicxx-dbus-runtime-build/${CMAKE_CXX_COMPILER_ID}"
+      SOURCE_DIR        "${CAPI_DIR}/src/capicxx-dbus-runtime"
+      BINARY_DIR        "${CAPI_DIR}/src/capicxx-dbus-runtime-build/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE}"
       CMAKE_ARGS        "-DCMAKE_INSTALL_PREFIX=${CAPI_ROOT}"
+                        "-DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}"
                         -DUSE_INSTALLED_COMMONAPI=OFF
                         -DUSE_INSTALLED_DBUS=OFF
    )

@@ -4,5 +4,24 @@
       {
          "path": "."
       }
+   ],
+
+   "build_systems":
+   [
+      {
+         "name": "CMake",
+         "working_dir": "${project_path}",
+         "variants":
+         [
+            {
+               "name": "configure - debug",
+               "shell_cmd": "mkdir -p ../${project_base_name}-products && cmake -B../${project_base_name}-products -H. -DCMAKE_BUILD_TYPE=Debug"
+            },
+            {
+               "name": "configure - release",
+               "shell_cmd": "mkdir -p ../${project_base_name}-products && cmake -B../${project_base_name}-products -H. -DCMAKE_BUILD_TYPE=Release"
+            },
+         ]
+      }
    ]
 }

@@ -1,8 +1,8 @@
 set( GTEST_VERSION 1.8.0 )
-set( GTEST_DIR ${PROJECT_SOURCE_DIR}/external-deps/googletest )
 
+set( GTEST_DIR ${PROJECT_SOURCE_DIR}/external-deps/googletest )
 if( ( NOT DEFINED ${GTEST_ROOT} ) OR ( NOT GTEST_ROOT ) )
-   set( GTEST_ROOT ${PROJECT_SOURCE_DIR}/external-deps/${CMAKE_CXX_COMPILER_ID} )
+   set( GTEST_ROOT ${PROJECT_SOURCE_DIR}/external-deps/${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}-${CMAKE_SYSTEM_PROCESSOR}-${CMAKE_BUILD_TYPE} )
 endif()
 
 configure_file( ${PROJECT_SOURCE_DIR}/cmake/GTest.cmake.in ${GTEST_DIR}/CMakeLists.txt )
